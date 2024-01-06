@@ -1,0 +1,14 @@
+.card {
+  max-width: 360px;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 25px;
+}
+
+.card-content {
+  margin-top: 25px;
+}
+
+.card-action {
+  padding-inline: 25px;
+}

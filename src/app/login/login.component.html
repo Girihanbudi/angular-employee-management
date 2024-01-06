@@ -1,0 +1,77 @@
+<div class="full-screen center">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title class="title">Login</mat-card-title>
+      <mat-card-subtitle
+        >Welcome to access Employee Management App
+      </mat-card-subtitle>
+    </mat-card-header>
+    <div class="card-content">
+      <p class="mat-caption">
+        Mock Data:
+        <br />
+        Email: {{ "giri-hanbudi@mailinator.com" }}
+        <br />
+        Password: {{ 123456 }}
+      </p>
+    </div>
+    <mat-card-content class="card-content">
+      <div>
+        <mat-form-field class="full-width">
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            placeholder="your@email.com"
+            [formControl]="email"
+            required
+          />
+          @if (email.invalid) {
+          <mat-error>{{ getEmailErrorMessage() }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="full-width">
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            [formControl]="password"
+            [type]="isPasswordHide ? 'password' : 'text'"
+            required
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="isPasswordHide = !isPasswordHide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="isPasswordHide"
+          >
+            <mat-icon>{{
+              isPasswordHide ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
+          @if (password.invalid) {
+          <mat-error>{{ getPasswordErrorMessage() }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="card-action">
+      <button
+        mat-fab
+        extended
+        color="primary"
+        class="full-width"
+        type="button"
+        (click)="login()"
+        [disabled]="isSubmitDisabled()"
+        type="button"
+      >
+        Login
+      </button>
+    </mat-card-actions>
+    <mat-card-content>
+      <mat-error>{{ getLoginErrorMessage() }}</mat-error>
+    </mat-card-content>
+  </mat-card>
+</div>
