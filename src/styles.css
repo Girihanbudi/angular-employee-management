@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+.full-width {
+  width: 100% !important;
+}
+
+.full-height {
+  height: 100% !important;
+}
+
+.full-screen {
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-weight: 900 !important;
+  font-size: 40px !important;
+  color: #6d42ba !important;
+  padding: 15px;
+}
+
+.container {
+  max-width: 1920px;
+  padding-inline: 32px;
+}
+
+.mat-mdc-snack-bar-container {
+  &.app-notification-error {
+    --mdc-snackbar-container-color: red;
+    --mat-snack-bar-button-color: #ffffff;
+    --mat-mdc-snack-bar-button-color: #ffffff;
+    --mdc-snackbar-supporting-text-color: #ffffff;
+  }
+
+  &.app-notification-warning {
+    --mdc-snackbar-container-color: goldenrod;
+    --mat-snack-bar-button-color: #ffffff;
+    --mat-mdc-snack-bar-button-color: #ffffff;
+    --mdc-snackbar-supporting-text-color: #ffffff;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
