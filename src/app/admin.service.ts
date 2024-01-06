@@ -9,6 +9,11 @@ import { Observable, of } from 'rxjs';
 export class AdminService {
   constructor() {}
 
+  getAdminById(id: number): Observable<Admin | undefined> {
+    const admin = of(adminList.find((admin) => admin.id === id));
+    return admin;
+  }
+
   getAdminByEmail(email: string): Observable<Admin | undefined> {
     const admin = of(adminList.find((admin) => admin.email === email));
     return admin;
