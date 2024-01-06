@@ -19,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
+import { numberThousandSeparator } from '../../utils';
 
 @Component({
   selector: 'app-employees',
@@ -122,5 +123,9 @@ export class EmployeesComponent implements AfterViewInit {
       verticalPosition: 'bottom',
       panelClass: 'app-notification-' + color,
     });
+  }
+
+  salaryFormat(x: number): string {
+    return 'Rp ' + numberThousandSeparator(x, ',');
   }
 }

@@ -6,3 +6,18 @@ table {
   font-size: 14px;
   width: 100%;
 }
+
+.filter {
+  padding-right: 16px;
+}
+
+.add-button {
+  width: 180px;
+  height: 50px;
+  margin-top: 4px;
+}
+
+.filter-container {
+  display: flex;
+  align-items: top;
+}

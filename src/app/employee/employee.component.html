@@ -1,0 +1,179 @@
+<div class="container">
+  <div class="title-container">
+    <h2 class="grow">Detail Employee</h2>
+    <a mat-button href="/employees" color="primary"> Back </a>
+  </div>
+
+  <mat-grid-list cols="2" rowHeight="8:1">
+    <!-- Username field -->
+    <mat-grid-tile>
+      <mat-form-field class="full-width input">
+        <mat-label>User Name</mat-label>
+        <input
+          matInput
+          placeholder="user_name"
+          [formControl]="userName"
+          required
+        />
+        @if (userName.invalid) {
+        <mat-error>{{ getUserNameErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- Email field -->
+    <mat-grid-tile>
+      <mat-form-field class="full-width input">
+        <mat-label>Enter employee email</mat-label>
+        <input
+          matInput
+          placeholder="Ex. employee@email.com"
+          [formControl]="email"
+          required
+        />
+        @if (email.invalid) {
+        <mat-error>{{ getEmailErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- First Name field -->
+    <mat-grid-tile>
+      <mat-form-field class="full-width input">
+        <mat-label>Enter employee first name</mat-label>
+        <input
+          matInput
+          placeholder="Ex. John"
+          [formControl]="firstName"
+          (change)="onNameChange($event)"
+          required
+        />
+        @if (firstName.invalid) {
+        <mat-error>{{ getFirstNameErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- Last name field -->
+    <mat-grid-tile>
+      <mat-form-field class="full-width input">
+        <mat-label>Enter employee last name</mat-label>
+        <input
+          matInput
+          placeholder="Ex. Doe"
+          [formControl]="lastName"
+          (change)="onNameChange($event)"
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- Birth date field -->
+    <mat-grid-tile>
+      <mat-form-field class="employee-form-field full-width input">
+        <mat-label>Select employee birth date</mat-label>
+        <input
+          matInput
+          placeholder="MM/DD/YYYY"
+          [matDatepicker]="datepicker"
+          [formControl]="birthDate"
+          [max]="today"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="datepicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #datepicker>
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>
+              Apply
+            </button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+        @if (birthDate.invalid) {
+        <mat-error>{{ getBirthDateErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- Salary field -->
+    <mat-grid-tile>
+      <mat-form-field class="full-width input">
+        <mat-label>Enter employee salary</mat-label>
+        <input
+          matInput
+          placeholder="Ex. 1.000.000"
+          type="number"
+          [formControl]="basicSalary"
+          required
+        />
+        @if (basicSalary.invalid) {
+        <mat-error>{{ getSalaryErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- Status field -->
+    <mat-grid-tile>
+      <mat-form-field class="full-width input">
+        <mat-label>Select employee status</mat-label>
+        <mat-select placeholder="Ex. Single" [formControl]="status">
+          @for (status of employeeStatuses; track status) {
+          <mat-option [value]="status">{{ status }}</mat-option>
+          }
+        </mat-select>
+        @if (group.invalid) {
+        <mat-error>{{ getStatusErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <!-- Group field -->
+    <mat-grid-tile>
+      <mat-form-field class="full-width input">
+        <mat-label>Select employee group</mat-label>
+        <mat-select
+          placeholder="Ex. Information Technology"
+          [formControl]="group"
+        >
+          @for (group of employeeGroups; track group) {
+          <mat-option [value]="group">{{ group }}</mat-option>
+          }
+        </mat-select>
+        @if (group.invalid) {
+        <mat-error>{{ getGroupErrorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <!-- Description field -->
+  <mat-form-field class="full-width input">
+    <mat-label>Add employee description</mat-label>
+    <textarea
+      matInput
+      placeholder="Ex. Employee description...."
+      [formControl]="description"
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="3"
+      cdkAutosizeMaxRows="5"
+    ></textarea>
+
+    @if (description.invalid) {
+    <mat-error>{{ getDescriptionErrorMessage() }}</mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    *ngIf="!readOly"
+    mat-fab
+    extended
+    color="primary"
+    class="full-width"
+    type="button"
+    (click)="submit()"
+    type="button"
+  >
+    Add Employee
+  </button>
+</div>

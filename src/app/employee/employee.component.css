@@ -1,0 +1,9 @@
+.input {
+  padding: 6px;
+}
+
+.title-container {
+  display: flex;
+  align-items: top;
+  margin-top: 16px;
+}
