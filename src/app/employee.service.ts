@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import Employee from '../types/employee';
-import employeeList from './mock-employees';
+import employeeList from '../mock/mock-employees';
 import { Observable, of } from 'rxjs';
 
 const STORAGE_KEY = 'employees';
@@ -13,7 +13,7 @@ export class EmployeeService {
 
   getEmployees(): Observable<Employee[]> {
     const data = this.getData();
-    if (data) return of(data);
+    if (data && data.length) return of(data);
     else {
       this.saveData(employeeList);
       return of(employeeList);
@@ -29,13 +29,27 @@ export class EmployeeService {
     }
   }
 
+  generateNewId(): Observable<number> {
+    let data = this.getData();
+    if (!data) data = employeeList;
+    const largest = Math.max(...data.map((employee) => employee.id));
+    return of(largest + 1);
+  }
+
+  saveEmployee(employee: Employee) {
+    let data = this.getData();
+    if (!data) data = employeeList;
+    data.push(employee);
+    this.saveData(data);
+  }
+
   saveData(employees: Employee[]) {
-    if (localStorage !== undefined)
+    if (localStorage)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(employees));
   }
 
   getData(): Employee[] {
-    if (localStorage !== undefined)
+    if (localStorage)
       return JSON.parse(
         localStorage.getItem('employees') || '[]'
       ) as Employee[];
