@@ -8,6 +8,25 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <div>
+  <p *ngIf="admin">
+    <mat-toolbar color="primary">
+      <button
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Employee Management</span>
+      <span class="spacer"></span>
+      <button mat-button [matMenuTriggerFor]="menu">
+        {{ admin.firstName }}
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </mat-toolbar>
+  </p>
   <router-outlet></router-outlet>
 </div>
 

@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AdminService } from '../admin.service';
 import Admin from '../../types/admin';
 import { AuthorizationService } from '../authorization.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -38,6 +39,7 @@ export class LoginComponent {
   loginError = '';
 
   constructor(
+    private router: Router,
     private adminService: AdminService,
     private auththorizationService: AuthorizationService
   ) {}
@@ -72,8 +74,9 @@ export class LoginComponent {
     if (email) {
       this.adminService.getAdminByEmail(email).subscribe((admin) => {
         if (admin && admin.password == password) {
-          this.auththorizationService.createAccessToken();
+          this.auththorizationService.identity = admin;
           this.loginError = '';
+          this.router.navigate(['/employees']);
         } else {
           this.loginError = 'Invalid email or password';
         }
