@@ -1,12 +1,27 @@
 import { Routes } from '@angular/router';
-import { EmployeeAddComponent } from './employee-add/employee-add.component';
-import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
+import { EmployeeComponent } from './employee/employee.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { LoginComponent } from './login/login.component';
+import { auth1Guard } from './auth-1.guard';
+import { auth2Guard } from './auth-2.guard';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'employees', component: EmployeesComponent },
-  { path: 'employees/add', component: EmployeeAddComponent },
-  { path: 'employees/:id', component: EmployeeDetailComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate: [auth1Guard] },
+  {
+    path: 'employees',
+    component: EmployeesComponent,
+    canActivate: [auth2Guard],
+  },
+  {
+    path: 'employees/add',
+    component: EmployeeComponent,
+    canActivate: [auth2Guard],
+  },
+  {
+    path: 'employees/:id',
+    component: EmployeeComponent,
+    canActivate: [auth2Guard],
+  },
+  { path: '**', redirectTo: '/login' },
 ];
