@@ -82,6 +82,23 @@ export class EmployeeComponent {
     }
   }
 
+  isButtonDisabled(): boolean {
+    if (
+      this.userName.errors ||
+      this.firstName.errors ||
+      this.lastName.errors ||
+      this.email.errors ||
+      this.birthDate.errors ||
+      this.basicSalary.errors ||
+      this.status.errors ||
+      this.group.errors ||
+      this.description.errors
+    )
+      return true;
+
+    return false;
+  }
+
   disableForm() {
     this.userName.disable();
     this.firstName.disable();
